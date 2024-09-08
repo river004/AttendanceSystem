@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-        <div class="form__text"><p> {{ \Auth::user()->name }} お疲れ様です</p></div>
+        <div class="form__text"><p> {{ \Auth::user()->name }}さん お疲れ様です</p></div>
         <form class="form__wrap" action="{{ route('work') }}" method="post">
         @csrf
         <div class="form__item">

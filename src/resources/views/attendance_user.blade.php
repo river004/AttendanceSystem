@@ -1,4 +1,4 @@
-extends('layouts.app')
+@extends('layouts.app')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/attendance.css') }}">
@@ -6,7 +6,7 @@ extends('layouts.app')
 @endsection
 
 @section('content')
-    <form class="header__wrap" action="{{ route('per/user') }}" method="post">
+    <form class="header__wrap"  method="post">
         @csrf
 
         @if($displayUser != null)
@@ -40,8 +40,8 @@ extends('layouts.app')
             @foreach ($users as $user)
                 <tr class="table__row">
                     <td class="table__item">{{ $user->date }}</td>
-                    <td class="table__item">{{ $user->start }}</td>
-                    <td class="table__item">{{ $user->end }}</td>
+                    <td class="table__item">{{ $user->start_work }}</td>
+                    <td class="table__item">{{ $user->end_work }}</td>
                     <td class="table__item">{{ $user->total_rest }}</td>
                     <td class="table__item">{{ $user->total_work }}</td>
                 </tr>

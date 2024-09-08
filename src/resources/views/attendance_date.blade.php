@@ -5,13 +5,9 @@
 @endsection
 
 @section('content')
-    <form class="header__wrap" action="{{ route('per/date') }}" method="post">
-        @csrf
-        <button class="date__change-button" name="prevDate"><</button>
-        <input type="hidden" name="displayDate" value="{{ $displayDate }}">
-        <p class="header__text">{{ $displayDate->format('Y-m-d') }}</p>
-        <button class="date__change-button" name="nextDate">></button>
-    </form>
+    <div class="header__wrap">
+        <p class="header__text">Attendance for {{ $currentDate->toDateString() }}</p>
+    </div>
     <div class="table__wrap">
         <table class="attendance__table">
             <tr class="table__row">
@@ -21,9 +17,6 @@
                 <th class="table__header">休憩時間</th>
                 <th class="table__header">勤務時間</th>
             </tr>
-            @php
-                $pageNumber = ($users->currentPage() - 1) * $users->perPage() + 1;
-            @endphp
             @foreach ($users as $user)
                 <tr class="table__row">
                     <td class="table__item">{{ $user->name }}</td>
@@ -32,11 +25,12 @@
                     <td class="table__item">{{ $user->total_rest }}</td>
                     <td class="table__item">{{ $user->total_work }}</td>
                 </tr>
-                @php
-                    $pageNumber++;
-                @endphp
             @endforeach
         </table>
     </div>
     {{ $users->links('vendor/pagination/default') }}
+    <div class="d-flex justify-content-between mt-3">
+        <a class="date__change-button" href="{{ route('attendance/date', $previousDate) }}" class="btn btn-primary"><</a>
+        <a class="date__change-button" href="{{ route('attendance/date', $nextDate) }}" class="btn btn-primary">></a>
+    </div>
 @endsection

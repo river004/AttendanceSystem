@@ -15,6 +15,7 @@
             <tr class="table__row">
                 <th class="table__header">ID</th>
                 <th class="table__header">名前</th>
+                <th class="table__header">勤怠表</th>
             </tr>
             @php
                 $pageNumber = ($users->currentPage() - 1) * $users->perPage() + 1;
@@ -23,6 +24,7 @@
                 <tr class="table__row">
                     <td class="table__item">{{ $user->id }}</td>
                     <td class="table__item">{{ $user->name }}</td>
+                    <td class="table__item"><a href="{{ route('attendance/user') }}?id={{ $user->id }}">勤怠表</a></td>
                 </tr>
                 @php
                     $pageNumber++;

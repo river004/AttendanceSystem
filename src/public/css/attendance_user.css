@@ -5,6 +5,7 @@
 .search__item {
     position: absolute;
     right: 0;
+    display: flex;
 }
 
 .search__input {
