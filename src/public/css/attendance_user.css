@@ -1,28 +1,31 @@
 .header__wrap {
-    position: relative;
-}
-
-.search__item {
-    position: absolute;
-    right: 0;
     display: flex;
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 30px;
+    width: 80%;
+    margin: auto;
 }
 
-.search__input {
-    width: 75%;
-    height: 35px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 2px solid darkgray;
-    border-radius: 5px;
-    background-color: #eee;
+.header__text {
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+    padding: 0;
+    border: none;
+}
+.header__month {
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+    padding: 0 3%;
+    border: none;
 }
 
-.search__button {
-    width: 23%;
-    height: 35px;
-    border-style: none;
-    background-color: rgb(38, 81, 207);
-    border-radius: 5px;
-    color: white;
+.date__change-button {
+    padding: 0 15px;
+    font-size: 20px;
+    color: steelblue;
+    border: 1px solid steelblue;
+    background-color: white;
 }

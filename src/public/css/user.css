@@ -1,10 +1,44 @@
+
+
 .header__wrap {
+    display: flex;
     position: relative;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    width: 80%;
+    margin: auto;
 }
 
-.header__text-right {
+.header__text {
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+    padding: 0 3%;
+    border: none;
+}
+
+.search__item {
     position: absolute;
     right: 0;
-    font-size: 20px;
-    margin: 0;
+    display: flex;
+}
+
+.search__input {
+    width: 79%;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid darkgray;
+    border-radius: 5px;
+    background-color: #eee;
+}
+
+.search__button {
+    width: 19%;
+    height: 30px;
+    border-style: none;
+    background-color: rgb(38, 81, 207);
+    border-radius: 5px;
+    color: white;
 }

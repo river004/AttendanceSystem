@@ -15,7 +15,7 @@ class Work extends Model
         'end_work',
         'total'
     ];
-
+    
     public function user() {
         return $this->belongsTo(User::class);
     }

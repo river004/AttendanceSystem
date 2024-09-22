@@ -109,39 +109,48 @@ class AttendanceController extends Controller
         $previousDate = $currentDate->copy()->subDay()->toDateString();
         $nextDate = $currentDate->copy()->addDay()->toDateString();
 
-        return view('attendance_date', compact('users', 'currentDate', 'previousDate', 'nextDate'));
+        return view('attendance_date', compact('users', 'currentDate', 'previousDate', 'nextDate', 'date'));
     }
 
-    public function indexUser(Request $request)
+    public function user(Request $request)
     {
-        $displayUser = Auth::user()->name;
-        $users = DB::table('attendance_view_table')
-            ->where('name', $displayUser)
-            ->paginate(1);
-        $userList = User::all();
+        // 検索クエリ
+        $search = $request->input('search');
 
-        return view('attendance_user', compact('users', 'displayUser', 'userList'));
+        // 検索クエリの作成
+        $query = User::query();
+
+         // ユーザーIDかユーザー名で検索する
+        if (!empty($search)) {
+            $query->where(function($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                    ->orWhere('name', 'like', "%{$search}%");
+            });
+        }
+
+        // ページネーションを適用してユーザーリストを取得
+        $users = $query->paginate(5);
+
+        return view('user', compact('users', 'search'));
     }
 
-    public function perUser(Request $request)
+    public function indexUser(Request $request, $userId)
     {
-        $searchName = $request->input('search_name');
-        $user = User::where('name', $searchName)->first();
-        $displayUser = $user ? $user->name : null;
+        // 月の指定があれば取得、なければ現在の月を使用
+        $currentMonth = $request->input('month', Carbon::now()->format('Y-m'));
 
-        $users = DB::table('attendance_view_table')
-            ->where('name', $searchName)
-            ->paginate(1);
+        // ユーザー情報を取得
+        $user = User::findOrFail($userId);
 
-        $userList = User::all();
+        // 指定した月の勤怠データを取得
+        $users = DB::table('attendance_view_table')->where('id', $userId)
+        ->where('date', 'like', "{$currentMonth}%")->paginate(31);
 
-        return view('attendance_user', compact('users', 'displayUser', 'userList'));
-    }
-    public function user()
-    {
-        $users = User::paginate(5);
-        $displayDate = Carbon::now();
+        // 月の前後のリンク用データを生成
+        $currentMonthDate = Carbon::createFromFormat('Y-m', $currentMonth);
+        $previousMonth = $currentMonthDate->copy()->subMonth()->format('Y-m');
+        $nextMonth = $currentMonthDate->copy()->addMonth()->format('Y-m');
 
-        return view('user', compact('users', 'displayDate'));
+        return view('attendance_user', compact('users', 'currentMonth', 'user', 'previousMonth', 'nextMonth'));
     }
 }

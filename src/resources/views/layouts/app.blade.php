@@ -23,14 +23,10 @@
                         <a href="/" class="header-nav__link">ホーム</a>
                     </li>
                     <li class="header-nav__item">
-                        <a href="{{ route('attendance/date') }}" class="header-nav__link">日付一覧</a>
-                        
+                        <a href="{{ route('attendance/date', ['date' => now()->format('Y-m-d')]) }}" class="btn btn-primary" class="header-nav__link">日付一覧</a>
                     </li>
                     <li class="header-nav__item">
                         <a class="header-nav__link" href="{{ route('user') }}">ユーザー一覧</a>
-                    </li>
-                    <li class="header-nav__item">
-                        <a class="header-nav__link" href="{{ route('attendance/user') }}">ユーザー一覧</a>
                     </li>
                     <li class="header-nav__item">
                         <form action="logout" method="post">

@@ -6,7 +6,9 @@
 
 @section('content')
     <div class="header__wrap">
-        <p class="header__text">Attendance for {{ $currentDate->toDateString() }}</p>
+        <a class="date__change-button" href="{{ route('attendance/date',  $previousDate) }}" class="btn btn-primary"><</a>
+        <h1 type="date" class="header__text"> {{ $currentDate->toDateString() }}</h1>
+        <a class="date__change-button" href="{{ route('attendance/date',  $nextDate) }}" class="btn btn-primary">></a>
     </div>
     <div class="table__wrap">
         <table class="attendance__table">
@@ -29,8 +31,4 @@
         </table>
     </div>
     {{ $users->links('vendor/pagination/default') }}
-    <div class="d-flex justify-content-between mt-3">
-        <a class="date__change-button" href="{{ route('attendance/date', $previousDate) }}" class="btn btn-primary"><</a>
-        <a class="date__change-button" href="{{ route('attendance/date', $nextDate) }}" class="btn btn-primary">></a>
-    </div>
 @endsection

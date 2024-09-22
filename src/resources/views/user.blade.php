@@ -7,8 +7,13 @@
 
 @section('content')
     <div class="header__wrap">
-        <p class="header__text">ユーザー一覧</p>
-        <p class="header__text-right">{{ $displayDate->format('Y-m-d') }} 現在</p>
+        <div class="header__text">
+            <h3>ユーザーリスト</h3>
+        </div>
+        <form method="GET" class="search__item" action="{{ route('user') }}">
+            <input class="search__input" type="text" name="search" placeholder="ユーザーIDまたは名前で検索" value="{{ request('search') }}">
+            <button class="search__button" type="submit" class="btn btn-primary">検索</button>
+        </form>
     </div>
     <div class="table__wrap">
         <table class="attendance__table">
@@ -21,16 +26,16 @@
                 $pageNumber = ($users->currentPage() - 1) * $users->perPage() + 1;
             @endphp
             @foreach ($users as $user)
-                <tr class="table__row">
-                    <td class="table__item">{{ $user->id }}</td>
-                    <td class="table__item">{{ $user->name }}</td>
-                    <td class="table__item"><a href="{{ route('attendance/user') }}?id={{ $user->id }}">勤怠表</a></td>
-                </tr>
+                <tr>
+                <td class="table__item">{{ $user->id }}</td>
+                <td class="table__item">{{ $user->name }}</td>
+                <td class="table__item"><a href="{{ route('attendance/user',  $user->id) }}" class="btn btn-primary">勤怠表</></td>
+            </tr>
                 @php
                     $pageNumber++;
                 @endphp
             @endforeach
         </table>
     </div>
-    {{ $users->links('vendor/pagination/paginate') }}
+    {{ $users->appends(['search' => request('search')])->links('vendor/pagination/paginate') }}
 @endsection
