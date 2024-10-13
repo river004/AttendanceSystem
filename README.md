@@ -4,8 +4,10 @@
 
 Dockerビルド
 
-1.　`git clone git@github.com:river004/AttendanceSystem.git`
-3.  `docker-compose up -d —build`
+
+1.　`git clone https://github.com/river004/AttendanceSystem`
+
+2.  `docker-compose up -d —build`
 
 ＊ MySQLは、OSによって起動しない場合があるのでそれぞれのPCに合わせて docker-compose.yml ファイルを編集してください。
 
