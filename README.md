@@ -29,10 +29,10 @@ DB_PASSWORD=laravel_pass
 
 ## 使用技術
 
-- PHP 
-- Laravel 
-- MySQL
-- nginx
+- PHP8.3.0
+- Laravel8.83.27
+- MySQL8.0.26
+- nginx1.21.1
 
 ## URL
 - 開発環境：http://localhost/
